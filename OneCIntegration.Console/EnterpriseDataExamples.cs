@@ -3,6 +3,7 @@ using OneCIntegration.EnterpriseData;
 
 namespace OneCIntegration.Console;
 
+/// <summary></summary>
 public class EnterpriseDataExamples
 {
     // Создаем для версии EnterpriseData 1.1, больше версия нигде не прописывается, только при создании
@@ -36,6 +37,7 @@ public class EnterpriseDataExamples
         };
     }
 
+    /// <summary></summary>
     public async Task GetDataWithСonfirmation()
     {
         // создаем сервис обмена
@@ -43,13 +45,14 @@ public class EnterpriseDataExamples
         // получаем сообщение из 1С
         var message = await enterpriseDataExchange.GetDataFrom1C();
         // что-то делаем с данными
-        var items = message?.Body?.Номенклатура;
+        var items = message.Body?.Номенклатура;
         // отсылаем уведомление для 1С, что данные приняты и обработаны
         // для простоты номер сообщения равен входящему, в реальности должен браться из какого-то счетчика
         var messageNo = enterpriseDataExchange.MessageHelper.GetMessageNo(message);
         await enterpriseDataExchange.PutConfirmationTo1C(message, messageNo);
     }
 
+    /// <summary></summary>
     public async Task GetAndPutData()
     {
         await using var enterpriseDataExchange = CreateEnterpriseDataExchange();

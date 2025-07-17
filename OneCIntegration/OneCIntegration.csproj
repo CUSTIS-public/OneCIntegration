@@ -4,6 +4,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>OneCIntegration</RootNamespace>
+    <PackageId>OneCIntegration</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.0.1</Version>
+    <Authors>ptrushin</Authors>
+    <Company>CUSTIS</Company>
+    <PackageDescription>https://github.com/CUSTIS-public/OneCIntegration</PackageDescription>
+    <PackageProjectUrl>https://github.com/CUSTIS-public/OneCIntegration</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

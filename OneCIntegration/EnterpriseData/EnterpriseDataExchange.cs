@@ -23,7 +23,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
     public decimal PartSize { get; set; } = 1024;
 
     /// <summary>Задержка между проверками готовности данных</summary>
-    public TimeSpan AttemptTimeout { get; set; } = TimeSpan.FromSeconds(1);
+    public TimeSpan AttemptTimeout { get; set; } = TimeSpan.FromSeconds(3);
 
     private readonly ILogger<EnterpriseDataExchange<T>> _logger;
 

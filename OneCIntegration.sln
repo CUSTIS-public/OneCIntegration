@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration", "OneCIntegration\OneCIntegration.csproj", "{8A474552-5AD4-4D25-9A4A-6FD9D39AEEFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration", "OneCIntegration\OneCIntegration.csproj", "{AC4778EF-F738-43ED-9839-4F23E681755E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Console", "OneCIntegration.Console\OneCIntegration.Console.csproj", "{AE147E87-463D-4170-970E-C67050B9F172}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Console", "OneCIntegration.Console\OneCIntegration.Console.csproj", "{3251A566-806F-4A0D-84DE-B29A61D1DB9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Tests", "OneCIntegration.Tests\OneCIntegration.Tests.csproj", "{E3235274-B155-4756-B1CA-A1826E7CF634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +18,17 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A474552-5AD4-4D25-9A4A-6FD9D39AEEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A474552-5AD4-4D25-9A4A-6FD9D39AEEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A474552-5AD4-4D25-9A4A-6FD9D39AEEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A474552-5AD4-4D25-9A4A-6FD9D39AEEFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE147E87-463D-4170-970E-C67050B9F172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE147E87-463D-4170-970E-C67050B9F172}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE147E87-463D-4170-970E-C67050B9F172}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE147E87-463D-4170-970E-C67050B9F172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC4778EF-F738-43ED-9839-4F23E681755E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC4778EF-F738-43ED-9839-4F23E681755E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC4778EF-F738-43ED-9839-4F23E681755E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC4778EF-F738-43ED-9839-4F23E681755E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3251A566-806F-4A0D-84DE-B29A61D1DB9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3251A566-806F-4A0D-84DE-B29A61D1DB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3251A566-806F-4A0D-84DE-B29A61D1DB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3251A566-806F-4A0D-84DE-B29A61D1DB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3235274-B155-4756-B1CA-A1826E7CF634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3235274-B155-4756-B1CA-A1826E7CF634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3235274-B155-4756-B1CA-A1826E7CF634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3235274-B155-4756-B1CA-A1826E7CF634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
