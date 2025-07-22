@@ -1,16 +1,13 @@
 ﻿using System.IO.Compression;
-using System.Net;
-using System.ServiceModel;
 using System.Xml.Serialization;
 using OneCIntegration.Utils;
 using ServiceReference;
 using Microsoft.Extensions.Logging;
-using OneCIntegration.EnterpriseData1_17;
 
 namespace OneCIntegration.EnterpriseData;
 
 /// <summary>Сервис обмена с 1С через EnterpriseData</summary>
-public class EnterpriseDataExchange<T> : IAsyncDisposable
+public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
     where T : class
 {
     private EnterpriseDataExchange_1_0_1_1PortTypeClient _client;
@@ -53,6 +50,17 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         if (_client != null) await _client.CloseAsync();
+        DeleteExchangeDirectory();
+    }
+
+    public void Dispose()
+    {
+        if (_client != null) _client.Close();
+        DeleteExchangeDirectory();
+    }
+
+    private void DeleteExchangeDirectory()
+    {
         if (DeleteExchangePath && Directory.Exists(ExchangePath))
         {
             Directory.Delete(ExchangePath, recursive: true);
