@@ -29,9 +29,11 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
 
     public readonly BaseMessageHelper<T> MessageHelper;
 
+    /// <summary>Папка с файлами обмена, по умолчанию создается во временной директории</summary>
     public string ExchangePath { get; set; }
 
-    public bool RemoveExchangePath { get; set; } = true; 
+    /// <summary>Удалить папку с файлами обмена в конце обмена (dispose)</summary>
+    public bool DeleteExchangePath { get; set; } = true; 
 
     public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client,
         string serviceURL,
@@ -51,7 +53,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         if (_client != null) await _client.CloseAsync();
-        if (RemoveExchangePath && Directory.Exists(ExchangePath))
+        if (DeleteExchangePath && Directory.Exists(ExchangePath))
         {
             Directory.Delete(ExchangePath, recursive: true);
         }

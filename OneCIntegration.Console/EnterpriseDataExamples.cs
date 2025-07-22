@@ -30,7 +30,7 @@ public class EnterpriseDataExamples
             logger: logger)
         {
             ExchangePath = Path.Combine(@"C:\files\1c", Guid.NewGuid().ToString()),
-            RemoveExchangePath = false,
+            DeleteExchangePath = false,
             PartSize = 1
         };
     }
