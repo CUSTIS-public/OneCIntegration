@@ -6,7 +6,7 @@ namespace OneCIntegration.EnterpriseData;
 
 public static class EnterpriseDataClientFactory
 {
-    public static EnterpriseDataExchange_1_0_1_1PortTypeClient CreateNtlm(string serviceURL, string user, string password)
+    public static EnterpriseDataExchange_1_0_1_1PortTypeClient CreateNtlm(string serviceURL, string user, string password, string? domain = null)
     {
         var binding = new BasicHttpBinding(BasicHttpSecurityMode.TransportCredentialOnly);
         binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Ntlm;
@@ -15,6 +15,7 @@ public static class EnterpriseDataClientFactory
         {
             UserName = user,
             Password = password,
+            Domain = domain
         };
         return client;
     }
