@@ -7,7 +7,7 @@
     <RootNamespace>OneCIntegration</RootNamespace>
     <PackageId>OneCIntegration</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <Authors>ptrushin</Authors>
     <Company>CUSTIS</Company>
     <PackageDescription>https://github.com/CUSTIS-public/OneCIntegration</PackageDescription>

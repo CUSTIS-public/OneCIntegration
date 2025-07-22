@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using OneCIntegration.Utils;
 using ServiceReference;
 using Microsoft.Extensions.Logging;
+using OneCIntegration.EnterpriseData1_17;
 
 namespace OneCIntegration.EnterpriseData;
 
@@ -14,7 +15,6 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
 {
     private EnterpriseDataExchange_1_0_1_1PortTypeClient _client;
     private readonly string _serviceURL;
-    private readonly string _user;
     private readonly string _ownPeerCode;
     private readonly string _otherPeerCode;
     private readonly string _exchangePlanName;
@@ -31,23 +31,17 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
 
     public string ExchangePath { get; set; }
 
-    public EnterpriseDataExchange(string serviceURL, string user, string password, string ownPeerCode, string otherPeerCode, string exchangePlanName,
+    public bool RemoveExchangePath { get; set; } = true; 
+
+    public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client, string serviceURL, string ownPeerCode, string otherPeerCode, string exchangePlanName,
         ILogger<EnterpriseDataExchange<T>> logger,
         BaseMessageHelper<T> messageHelper)
     {
         _logger = logger;
         MessageHelper = messageHelper;
         ExchangePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        var binding = new BasicHttpBinding(BasicHttpSecurityMode.TransportCredentialOnly);
-        binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Ntlm;
-        _client = new EnterpriseDataExchange_1_0_1_1PortTypeClient(binding, new EndpointAddress(serviceURL));
-        _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential
-        {
-            UserName = user,
-            Password = password,
-        };
+        _client = client;
         _serviceURL = serviceURL;
-        _user = user;
         _ownPeerCode = ownPeerCode;
         _otherPeerCode = otherPeerCode;
         _exchangePlanName = exchangePlanName;
@@ -56,6 +50,10 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         if (_client != null) await _client.CloseAsync();
+        if (RemoveExchangePath && Directory.Exists(ExchangePath))
+        {
+            Directory.Delete(ExchangePath, recursive: true);
+        }
     }
 
     private async Task Ping()
