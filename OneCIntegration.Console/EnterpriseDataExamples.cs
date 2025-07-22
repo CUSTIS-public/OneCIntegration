@@ -26,11 +26,8 @@ public class EnterpriseDataExamples
         return new EnterpriseDataExchange<EnterpriseData1_17.Message>(
             client: EnterpriseDataClientFactory.CreateNtlm(serviceURL, user, password),
             serviceURL: serviceURL,
-            ownPeerCode: "ЦП",
-            otherPeerCode: "ЦБ",
-            exchangePlanName: "СинхронизацияДанныхЧерезУниверсальныйФормат",
-            logger,
-            messageHelper)
+            messageHelper: messageHelper,
+            logger: logger)
         {
             ExchangePath = Path.Combine(@"C:\files\1c", Guid.NewGuid().ToString()),
             RemoveExchangePath = false,

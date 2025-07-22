@@ -3,9 +3,9 @@ namespace OneCIntegration.EnterpriseData;
 public abstract class BaseMessageHelper<T>
     where T : class
 {
-    protected readonly string OwnPeerCode;
-    protected readonly string OtherPeerCode;
-    protected readonly string ExchangePlanName;
+    public readonly string OwnPeerCode;
+    public readonly string OtherPeerCode;
+    public readonly string ExchangePlanName;
 
     protected abstract string Format { get; }
 

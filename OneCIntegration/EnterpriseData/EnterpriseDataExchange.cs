@@ -33,18 +33,19 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable
 
     public bool RemoveExchangePath { get; set; } = true; 
 
-    public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client, string serviceURL, string ownPeerCode, string otherPeerCode, string exchangePlanName,
-        ILogger<EnterpriseDataExchange<T>> logger,
-        BaseMessageHelper<T> messageHelper)
+    public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client,
+        string serviceURL,
+        BaseMessageHelper<T> messageHelper,
+        ILogger<EnterpriseDataExchange<T>> logger)
     {
+        _client = client;
         _logger = logger;
         MessageHelper = messageHelper;
         ExchangePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        _client = client;
         _serviceURL = serviceURL;
-        _ownPeerCode = ownPeerCode;
-        _otherPeerCode = otherPeerCode;
-        _exchangePlanName = exchangePlanName;
+        _ownPeerCode = MessageHelper.OwnPeerCode;
+        _otherPeerCode = MessageHelper.OtherPeerCode;
+        _exchangePlanName = MessageHelper.ExchangePlanName;
     }
 
     public async ValueTask DisposeAsync()
