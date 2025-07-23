@@ -235,7 +235,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
         /*var dir = Path.Combine(Path.GetTempPath(), "0b0f900d-0ae3-4a3e-b166-eb767ada629b");
         var requestDir = Path.Combine(dir, "request");*/
 
-        var message = ReadMessageFromFile(dataPath + @"\data.xml");
+        var message = ReadMessageFromFile(Path.Combine(dataPath, "data.xml"));
 
         return message;
     }
@@ -246,7 +246,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
     {
         var basePath = GetTo1CPath();
         var dataPath = GetDataPath(basePath);
-        WriteMessageToFile(message, dataPath + @"\data.xml");
+        WriteMessageToFile(message, Path.Combine(dataPath, "data.xml"));
 
         // Упакуем файл в zip
         var file = Path.Combine(basePath, "data.zip");
