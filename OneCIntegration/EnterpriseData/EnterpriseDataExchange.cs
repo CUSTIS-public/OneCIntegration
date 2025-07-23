@@ -49,13 +49,13 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
 
     public async ValueTask DisposeAsync()
     {
-        if (_client != null) await _client.CloseAsync();
+        if (_client != null && _client.State == System.ServiceModel.CommunicationState.Opened) await _client.CloseAsync();
         DeleteExchangeDirectory();
     }
 
     public void Dispose()
     {
-        if (_client != null) _client.Close();
+        if (_client != null && _client.State == System.ServiceModel.CommunicationState.Opened) _client.Close();
         DeleteExchangeDirectory();
     }
 

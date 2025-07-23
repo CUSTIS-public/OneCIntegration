@@ -12,7 +12,7 @@ public class EnterpriseDataExamples
         // надо установить переменные до запуска setx ONEC_USER "???"
         var user = Environment.GetEnvironmentVariable("ONEC_USER")!;
         var password = Environment.GetEnvironmentVariable("ONEC_PASSWORD")!;
-        var serviceURL = "http://inf-3cserver.office.custis.ru/ERPUH/ws/EnterpriseDataExchange_1_0_1_1.1cws";
+        var serviceURL = "http://inf-3cserver.office.custis.ru/ERPUHL/ws/EnterpriseDataExchange_1_0_1_1.1cws";
         var logger = LoggerFactory
             .Create(builder => builder
                 .AddConsole()
@@ -24,7 +24,7 @@ public class EnterpriseDataExamples
             exchangePlanName: "СинхронизацияДанныхЧерезУниверсальныйФормат"
         );
         return new EnterpriseDataExchange<EnterpriseData1_17.Message>(
-            client: EnterpriseDataClientFactory.CreateNtlm(serviceURL, user, password),
+            client: EnterpriseDataClientFactory.CreateBasic(serviceURL, user, password),
             serviceURL: serviceURL,
             messageHelper: messageHelper,
             logger: logger)
