@@ -30,7 +30,10 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
     public string ExchangePath { get; set; }
 
     /// <summary>Удалить папку с файлами обмена в конце обмена (dispose)</summary>
-    public bool DeleteExchangePath { get; set; } = true; 
+    public bool DeleteExchangePathOnDispose { get; set; } = true; 
+
+    /// <summary>Удалить папку с файлами обмена после каждого обмена</summary>
+    public bool DeleteExchangePathAfterExchange { get; set; } = true; 
 
     public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client,
         string serviceURL,
@@ -61,7 +64,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
 
     private void DeleteExchangeDirectory()
     {
-        if (DeleteExchangePath && Directory.Exists(ExchangePath))
+        if (DeleteExchangePathOnDispose && Directory.Exists(ExchangePath))
         {
             Directory.Delete(ExchangePath, recursive: true);
         }
@@ -237,6 +240,11 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
 
         var message = ReadMessageFromFile(Path.Combine(dataPath, "data.xml"));
 
+        if (DeleteExchangePathAfterExchange && Directory.Exists(basePath))
+        {
+            Directory.Delete(basePath, recursive: true);
+        }
+
         return message;
     }
 
@@ -253,6 +261,11 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
         ZipFile.CreateFromDirectory(dataPath, file);
 
         await PutDataToWebServiceInternal(file);
+
+        if (DeleteExchangePathAfterExchange && Directory.Exists(basePath))
+        {
+            Directory.Delete(basePath, recursive: true);
+        }
     }
 
     /// <summary>Отослать уведомление о получении (пустое сообщение)</summary>

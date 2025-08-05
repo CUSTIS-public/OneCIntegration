@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using OneCIntegration.EnterpriseData1_19;
 
-namespace OneCIntegration.EnterpriseData1_17;
+namespace OneCIntegration.EnterpriseData1_19;
 
 [XmlRoot(ElementName = "Message", Namespace = "")]
 public partial class Message

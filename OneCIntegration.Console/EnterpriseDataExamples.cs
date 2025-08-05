@@ -7,7 +7,7 @@ namespace OneCIntegration.Console;
 public class EnterpriseDataExamples
 {
     // Создаем для версии EnterpriseData 1.1, больше версия нигде не прописывается, только при создании
-    private EnterpriseDataExchange<EnterpriseData1_17.Message> CreateEnterpriseDataExchange()
+    private EnterpriseDataExchange<EnterpriseData1_19.Message> CreateEnterpriseDataExchange()
     {
         // надо установить переменные до запуска setx ONEC_USER "???"
         var user = Environment.GetEnvironmentVariable("ONEC_USER")!;
@@ -17,21 +17,22 @@ public class EnterpriseDataExamples
             .Create(builder => builder
                 .AddConsole()
                 .SetMinimumLevel(LogLevel.Debug))
-            .CreateLogger<EnterpriseDataExchange<EnterpriseData1_17.Message>>();
-        var messageHelper = new EnterpriseData1_17.MessageHelper(
+            .CreateLogger<EnterpriseDataExchange<EnterpriseData1_19.Message>>();
+        var messageHelper = new EnterpriseData1_19.MessageHelper(
             ownPeerCode: "ЦП",
             otherPeerCode: "ЦБ",
             exchangePlanName: "СинхронизацияДанныхЧерезУниверсальныйФормат"
         );
-        return new EnterpriseDataExchange<EnterpriseData1_17.Message>(
+        return new EnterpriseDataExchange<EnterpriseData1_19.Message>(
             client: EnterpriseDataClientFactory.CreateBasic(serviceURL, user, password),
             serviceURL: serviceURL,
             messageHelper: messageHelper,
             logger: logger)
         {
             ExchangePath = Path.Combine(@"C:\files\1c", Guid.NewGuid().ToString()),
-            DeleteExchangePath = false,
-            PartSize = 1
+            DeleteExchangePathOnDispose = false,
+            DeleteExchangePathAfterExchange = false
+            //PartSize = 1
         };
     }
 
@@ -66,7 +67,6 @@ public class EnterpriseDataExamples
             if (items?.Count > 0)
             {
                 var responseMessage = enterpriseDataExchange.MessageHelper.CreateMessage(receivedNo, messageNo);
-                responseMessage.Body = new EnterpriseData1_17.Body();
                 items.ForEach(i =>
                 {
                     i.КлючевыеСвойства.Наименование = i.КлючевыеСвойства.Наименование.Substring(0, i.КлючевыеСвойства.Наименование.Length - 7);
