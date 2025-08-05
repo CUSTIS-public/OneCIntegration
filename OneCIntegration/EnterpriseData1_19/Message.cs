@@ -20,11 +20,11 @@ public partial class Message
     [XmlElement(ElementName = "Header", Namespace = "http://www.1c.ru/SSL/Exchange/Message")]
     public Header Header { get; set; } = null!;
 
-    [XmlElement(ElementName = "Body", Namespace = "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.17")]
+    [XmlElement(ElementName = "Body", Namespace = "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.19")]
     public Body Body { get; set; } = null!;
 }
 
-[XmlRoot(ElementName = "Body", Namespace = "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.17")]
+[XmlRoot(ElementName = "Body", Namespace = "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.19")]
 public class Body
 {
     [XmlElement(ElementName = "Документ.АвансовыйОтчет")]

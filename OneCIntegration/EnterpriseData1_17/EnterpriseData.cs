@@ -77885,7 +77885,7 @@ namespace OneCIntegration.EnterpriseData1_17
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1185.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("Object", Namespace="http://www.1c.ru/SSL/Exchange/Message")]
+    [System.Xml.Serialization.XmlTypeAttribute("Object1.17", Namespace="")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OneCIntegration.EnterpriseData1_17.ДокументАвансовыйОтчет))]
