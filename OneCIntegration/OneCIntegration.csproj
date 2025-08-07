@@ -7,7 +7,7 @@
     <RootNamespace>OneCIntegration</RootNamespace>
     <PackageId>OneCIntegration</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.15</Version>
+    <Version>0.0.16</Version>
     <Authors>ptrushin</Authors>
     <Company>CUSTIS</Company>
     <PackageDescription>https://github.com/CUSTIS-public/OneCIntegration</PackageDescription>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OneCIntegration.Data\OneCIntegration.Data.csproj"/>
+    <ProjectReference Include="..\OneCIntegration.Data\OneCIntegration.Data.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <Target Name="IncludeP2PAssets">
