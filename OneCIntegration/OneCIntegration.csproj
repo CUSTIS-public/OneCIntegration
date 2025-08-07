@@ -7,11 +7,12 @@
     <RootNamespace>OneCIntegration</RootNamespace>
     <PackageId>OneCIntegration</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.14</Version>
+    <Version>0.0.15</Version>
     <Authors>ptrushin</Authors>
     <Company>CUSTIS</Company>
     <PackageDescription>https://github.com/CUSTIS-public/OneCIntegration</PackageDescription>
     <PackageProjectUrl>https://github.com/CUSTIS-public/OneCIntegration</PackageProjectUrl>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeP2PAssets</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +27,11 @@
   <ItemGroup>
     <ProjectReference Include="..\OneCIntegration.Data\OneCIntegration.Data.csproj"/>
   </ItemGroup>
+
+  <Target Name="IncludeP2PAssets">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\OneCIntegration.Data.dll" PackagePath="lib\$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
 
 </Project>
