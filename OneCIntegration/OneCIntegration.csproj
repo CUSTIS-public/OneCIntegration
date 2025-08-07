@@ -7,7 +7,7 @@
     <RootNamespace>OneCIntegration</RootNamespace>
     <PackageId>OneCIntegration</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.12</Version>
+    <Version>0.0.13</Version>
     <Authors>ptrushin</Authors>
     <Company>CUSTIS</Company>
     <PackageDescription>https://github.com/CUSTIS-public/OneCIntegration</PackageDescription>
@@ -20,6 +20,11 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.*" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.*" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.*" />
+    <PackageReference Include="Simple.OData.Client" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneCIntegration.Data\OneCIntegration.Data.csproj"/>
   </ItemGroup>
 
 </Project>

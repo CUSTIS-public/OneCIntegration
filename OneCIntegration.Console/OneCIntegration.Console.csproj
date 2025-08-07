@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OneCIntegration.Data\OneCIntegration.Data.csproj"/>
     <ProjectReference Include="..\OneCIntegration\OneCIntegration.csproj"/>
   </ItemGroup>
 

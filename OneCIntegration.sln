@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Console", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Tests", "OneCIntegration.Tests\OneCIntegration.Tests.csproj", "{E3235274-B155-4756-B1CA-A1826E7CF634}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCIntegration.Data", "OneCIntegration.Data\OneCIntegration.Data.csproj", "{3A578BE1-1C96-493A-AAD0-C0E92B33383B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E3235274-B155-4756-B1CA-A1826E7CF634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3235274-B155-4756-B1CA-A1826E7CF634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3235274-B155-4756-B1CA-A1826E7CF634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A578BE1-1C96-493A-AAD0-C0E92B33383B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A578BE1-1C96-493A-AAD0-C0E92B33383B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A578BE1-1C96-493A-AAD0-C0E92B33383B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A578BE1-1C96-493A-AAD0-C0E92B33383B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

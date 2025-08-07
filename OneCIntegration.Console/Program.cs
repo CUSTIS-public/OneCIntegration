@@ -1,5 +1,8 @@
 ﻿using OneCIntegration.Console;
 
-var examples = new EnterpriseDataExamples();
-await examples.GetDataWithСonfirmation();
+var enterpriseDataExamples = new EnterpriseDataExamples();
+await enterpriseDataExamples.GetDataWithСonfirmation();
 //await examples.TestGetAndPutData();
+
+var oDataExamples = new ODataExamples();
+await oDataExamples.GetData();

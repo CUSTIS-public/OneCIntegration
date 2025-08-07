@@ -12,7 +12,7 @@ public class EnterpriseDataExamples
         // надо установить переменные до запуска setx ONEC_USER "???"
         var user = Environment.GetEnvironmentVariable("ONEC_USER")!;
         var password = Environment.GetEnvironmentVariable("ONEC_PASSWORD")!;
-        var serviceURL = "http://inf-3cserver.office.custis.ru/ERPUHL/ws/EnterpriseDataExchange_1_0_1_1.1cws";
+        var serviceURL = Environment.GetEnvironmentVariable("ONEC_URL")! + "/ws/EnterpriseDataExchange_1_0_1_1.1cws";
         var logger = LoggerFactory
             .Create(builder => builder
                 .AddConsole()
