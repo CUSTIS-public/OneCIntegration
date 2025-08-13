@@ -30,10 +30,13 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
     public string ExchangePath { get; set; }
 
     /// <summary>Удалить папку с файлами обмена в конце обмена (dispose)</summary>
-    public bool DeleteExchangePathOnDispose { get; set; } = true; 
+    public bool DeleteExchangePathOnDispose { get; set; } = true;
 
     /// <summary>Удалить папку с файлами обмена после каждого обмена</summary>
-    public bool DeleteExchangePathAfterExchange { get; set; } = true; 
+    public bool DeleteExchangePathAfterExchange { get; set; } = true;
+
+    /// <summary>Атрибуты сериализации</summary>
+    public XmlAttributeOverrides XmlAttributeOverrides { get; set; }
 
     public EnterpriseDataExchange(EnterpriseDataExchange_1_0_1_1PortTypeClient client,
         string serviceURL,
@@ -174,7 +177,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
 
     private T ReadMessageFromFile(string fileName)
     {
-        var serializer = new XmlSerializer(typeof(T));
+        var serializer = new XmlSerializer(typeof(T), XmlAttributeOverrides);
         using var reader = new StreamReader(fileName);
         return (T)serializer.Deserialize(reader)!;
     }
@@ -188,7 +191,7 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
             NewLineChars = "\r\n",
             NewLineHandling = System.Xml.NewLineHandling.Replace
         };
-        var serializer = new XmlSerializer(typeof(T));
+        var serializer = new XmlSerializer(typeof(T), XmlAttributeOverrides);
         using var xmlWriter = System.Xml.XmlWriter.Create(fileName, settings);
         //using var customWriter = new CustomXmlWriter(xmlWriter);
         serializer.Serialize(xmlWriter, message);
@@ -234,9 +237,6 @@ public class EnterpriseDataExchange<T> : IAsyncDisposable, IDisposable
         var files = await GetDataFromWebServiceInternal(Path.Combine(basePath, "data"));
         // распакуем файл xml
         ZipHelper.ExtractToDirectory(files, Path.Combine(basePath, "data.zip"), dataPath);
-
-        /*var dir = Path.Combine(Path.GetTempPath(), "0b0f900d-0ae3-4a3e-b166-eb767ada629b");
-        var requestDir = Path.Combine(dir, "request");*/
 
         var message = ReadMessageFromFile(Path.Combine(dataPath, "data.xml"));
 

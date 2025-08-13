@@ -2,7 +2,9 @@ using OneCIntegration.EnterpriseData;
 
 namespace OneCIntegration.EnterpriseData1_19;
 
-public class MessageHelper : BaseMessageHelper<Message>
+public class MessageHelper<T, TBody> : BaseMessageHelper<T>
+    where T : Message, new()
+    where TBody: Body, new()
 {
     protected override string Format => "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.19";
 
@@ -24,9 +26,9 @@ public class MessageHelper : BaseMessageHelper<Message>
     {
     }
 
-    public override Message CreateMessage(string receivedNo, string messageNo)
+    public override T CreateMessage(string receivedNo, string messageNo)
     {
-        var message = new Message();
+        var message = new T();
         message.Header = new Header();
         message.Header.Format = Format;
         message.Header.CreationDate = DateTime.Now;
@@ -39,16 +41,16 @@ public class MessageHelper : BaseMessageHelper<Message>
             ReceivedNo = receivedNo,
             MessageNo = messageNo
         };
-        message.Body = new Body();
+        message.Body = new TBody();
         return message;
     }
 
-    public override string GetMessageNo(Message message)
+    public override string GetMessageNo(T message)
     {
         return message.Header.Confirmation.MessageNo;
     }
 
-    public override string GetReceivedNo(Message message)
+    public override string GetReceivedNo(T message)
     {
         return message.Header.Confirmation.ReceivedNo;
     }

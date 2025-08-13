@@ -1,4 +1,6 @@
+using System.Xml.Serialization;
 using Microsoft.Extensions.Logging;
+using OneCIntegration.Console.Models;
 using OneCIntegration.EnterpriseData;
 
 namespace OneCIntegration.Console;
@@ -6,8 +8,10 @@ namespace OneCIntegration.Console;
 /// <summary></summary>
 public class EnterpriseDataExamples
 {
-    // Создаем для версии EnterpriseData 1.1, больше версия нигде не прописывается, только при создании
-    private EnterpriseDataExchange<EnterpriseData1_19.Message> CreateEnterpriseDataExchange()
+    // Создаем для версии EnterpriseData 1.19, больше версия нигде не прописывается, только при создании
+    private EnterpriseDataExchange<T> CreateEnterpriseDataExchange<T, TBody>()
+        where T : EnterpriseData1_19.Message, new()
+        where TBody: EnterpriseData1_19.Body, new()
     {
         // надо установить переменные до запуска setx ONEC_USER "???"
         var user = Environment.GetEnvironmentVariable("ONEC_USER")!;
@@ -17,13 +21,13 @@ public class EnterpriseDataExamples
             .Create(builder => builder
                 .AddConsole()
                 .SetMinimumLevel(LogLevel.Debug))
-            .CreateLogger<EnterpriseDataExchange<EnterpriseData1_19.Message>>();
-        var messageHelper = new EnterpriseData1_19.MessageHelper(
+            .CreateLogger<EnterpriseDataExchange<T>>();
+        var messageHelper = new EnterpriseData1_19.MessageHelper<T, TBody>(
             ownPeerCode: "ЦП",
             otherPeerCode: "ЦБ",
             exchangePlanName: "СинхронизацияДанныхЧерезУниверсальныйФормат"
         );
-        return new EnterpriseDataExchange<EnterpriseData1_19.Message>(
+        return new EnterpriseDataExchange<T>(
             client: EnterpriseDataClientFactory.CreateBasic(serviceURL, user, password),
             serviceURL: serviceURL,
             messageHelper: messageHelper,
@@ -36,7 +40,13 @@ public class EnterpriseDataExamples
         };
     }
 
-    /// <summary></summary>
+    // Создаем для версии EnterpriseData 1.19, больше версия нигде не прописывается, только при создании
+    private EnterpriseDataExchange<EnterpriseData1_19.Message> CreateEnterpriseDataExchange()
+    {
+        return CreateEnterpriseDataExchange<EnterpriseData1_19.Message, EnterpriseData1_19.Body>();
+    }
+
+    /// <summary>Получить данные и подтвердить получение</summary>
     public async Task GetDataWithСonfirmation()
     {
         // создаем сервис обмена
@@ -51,7 +61,7 @@ public class EnterpriseDataExamples
         await enterpriseDataExchange.PutConfirmationTo1C(message, messageNo);
     }
 
-    /// <summary></summary>
+    /// <summary>Изменить данные</summary>
     public async Task GetAndPutData()
     {
         await using var enterpriseDataExchange = CreateEnterpriseDataExchange();
@@ -78,6 +88,32 @@ public class EnterpriseDataExamples
         }
 
         // если еще не отослали сообщение с изменениями, то отсылаем просто уведомление, что сообщение получено
+        await enterpriseDataExchange.PutConfirmationTo1C(message, messageNo);
+    }
+
+    /// <summary>Получить данные с кастомным полем</summary>
+    public async Task GetDataWithCustomFields()
+    {
+        // Игнорируем все переопределяемые свойства
+        var overrides = new XmlAttributeOverrides();
+        var baseAttributes = new XmlAttributes
+        {
+            XmlIgnore = true
+        };
+        overrides.Add(typeof(EnterpriseData1_19.СправочникПодразделения), nameof(EnterpriseData1_19.СправочникПодразделения.КлючевыеСвойства), baseAttributes);
+        overrides.Add(typeof(EnterpriseData1_19.Body), nameof(EnterpriseData1_19.Body.Подразделения), baseAttributes);
+        overrides.Add(typeof(EnterpriseData1_19.Message), nameof(EnterpriseData1_19.Message.Body), baseAttributes);
+
+        // создаем сервис обмена
+        await using var enterpriseDataExchange = CreateEnterpriseDataExchange<MessageCustom, BodyCustom>();
+        enterpriseDataExchange.XmlAttributeOverrides = overrides;
+        // получаем сообщение из 1С
+        var message = await enterpriseDataExchange.GetDataFrom1C();
+        // что-то делаем с данными
+        var items = message.Body?.Подразделения;
+        // отсылаем уведомление для 1С, что данные приняты и обработаны
+        // для простоты номер сообщения равен входящему, в реальности должен браться из какого-то счетчика
+        var messageNo = enterpriseDataExchange.MessageHelper.GetMessageNo(message);
         await enterpriseDataExchange.PutConfirmationTo1C(message, messageNo);
     }
 }

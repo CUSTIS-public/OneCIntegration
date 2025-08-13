@@ -8,4 +8,4 @@
 
 ## Интеграция через odata
 
-* Примеры в ODataDataExamples
+* Примеры в ODataExamples
