@@ -54,3 +54,11 @@ public class MessageHelper<T, TBody> : BaseMessageHelper<T>
         return message.Header.Confirmation.ReceivedNo;
     }
 }
+
+public class MessageHelper : MessageHelper<Message, Body>
+{
+    public MessageHelper(string ownPeerCode, string otherPeerCode, string exchangePlanName, List<string>? availableVersions = null)
+        : base(ownPeerCode, otherPeerCode, exchangePlanName, availableVersions)
+    {
+    }
+}

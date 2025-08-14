@@ -4,7 +4,7 @@ namespace OneCIntegration.EnterpriseData1_19;
 
 public class MessageHelper<T, TBody> : BaseMessageHelper<T>
     where T : Message, new()
-    where TBody: Body, new()
+    where TBody : Body, new()
 {
     protected override string Format => "http://v8.1c.ru/edi/edi_stnd/EnterpriseData/1.19";
 
@@ -53,5 +53,13 @@ public class MessageHelper<T, TBody> : BaseMessageHelper<T>
     public override string GetReceivedNo(T message)
     {
         return message.Header.Confirmation.ReceivedNo;
+    }
+}
+
+public class MessageHelper : MessageHelper<Message, Body>
+{
+    public MessageHelper(string ownPeerCode, string otherPeerCode, string exchangePlanName, List<string>? availableVersions = null)
+        : base(ownPeerCode, otherPeerCode, exchangePlanName, availableVersions)
+    {
     }
 }
